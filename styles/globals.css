@@ -1,0 +1,90 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: #191b1f;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: rgb(30, 77, 34);
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.textarea {
+  font-size: 20px;
+  width: 60%;
+  margin-top: 2rem;
+  height: 200px;
+  padding: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.error-text {
+  color: #a72b2b;
+}
+
+.comment-area {
+  width: 300px;
+  height: 50px;
+  font-family: 'Roboto', sans-serif;
+  padding: 0.5rem;
+}
+
+.comments-list {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.author {
+  font-size: 12px;
+  color: #cccccc;
+  margin-bottom: 5px;
+}
+
+.comment-info {
+  margin-left: 10px;
+  max-width: 80%;
+}
+
+.avatar {
+  background: url('https://icon-library.com/images/user-icon-png/user-icon-png-27.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 70px;
+  height: 70px;
+}
+
+@media (max-width: 1200px) {
+  .textarea {
+    width: 80%;
+  }
+}
+
+@media (max-width: 900px) {
+  .textarea {
+    width: 100%;
+  }
+
+  .comment-info {
+    max-width: 100%;
+  }
+}

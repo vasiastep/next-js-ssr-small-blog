@@ -1,0 +1,18 @@
+.post {
+  text-align: center;
+  padding: 2rem;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.postTitle {
+  text-align: center;
+}
+
+.title-input {
+  font-size: 20px;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: #000;
+  font-weight: 200;
+}

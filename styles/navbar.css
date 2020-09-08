@@ -1,0 +1,13 @@
+.nav-link {
+  transition: color 0.3s;
+  color: #ccc;
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.spacing {
+  color: #fff;
+  margin: 0 1rem;
+}
