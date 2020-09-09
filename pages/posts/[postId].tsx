@@ -1,20 +1,22 @@
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { MainLayout } from '../../components/MainLayout'
-import { NextPageContext } from 'next'
-import axios from 'axios'
-import { API_URL } from '../../constants'
-import styled from 'styled-components'
-import { addNewComment } from '../../redux/actions'
-import { IPostWithComment } from '../../interfaces'
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { MainLayout } from '../../components/MainLayout';
+import { NextPageContext } from 'next';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import styled from 'styled-components';
+import { addNewComment, setNewComments } from '../../redux/actions';
+import { IPostWithComment, IComment } from '../../interfaces';
+
+import classes from '../../styles/post.module.css';
 
 const CommentSection = styled.div`
   margin-top: 5rem;
-`
+`;
 
 const Section = styled.section`
   text-align: justify;
-`
+`;
 const Comment = styled.div`
   padding: 1rem 2rem;
   border: 1px solid #ccc;
@@ -27,32 +29,46 @@ const Comment = styled.div`
   @media (max-width: 900px) {
     flex-direction: column;
   }
-`
+`;
 
-export default function Post({ post }: { post: IPostWithComment }) {
-  const [comment, setComment] = useState<string>('')
-  const [error, setError] = useState<string>('')
-  const dispatch = useDispatch()
-  const [comments, setComments] = useState(post.comments)
-  const { list } = useSelector((state) => state.post)
+export default function Post({
+  post,
+}: {
+  post: IPostWithComment;
+}): JSX.Element {
+  const [comment, setComment] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const dispatch = useDispatch();
+  const [comments, setComments] = useState<IComment[]>(post.comments);
+  const { list } = useSelector((state) => state.post);
 
   const addComment = async () => {
     if (comment) {
-      dispatch(addNewComment(comment, post))
+      dispatch(addNewComment(comment, post));
 
-      setComment('')
+      setComment('');
     } else {
-      return setError('Type something if you want to add comment!')
+      return setError('Type something if you want to add comment!');
     }
-  }
+  };
 
   useEffect(() => {
-    setComments(post.comments.concat(list))
-  }, [list])
+    if (!list.length) {
+      setComments(post.comments);
+    } else {
+      setComments(list);
+    }
+  }, [list]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setNewComments([]));
+    };
+  }, []);
 
   return (
     <MainLayout title="Post">
-      <h1 className="postTitle">{post?.title}</h1>
+      <h1 className={classes.postTitle}>{post?.title}</h1>
       <Section>
         <p>{post?.body}</p>
         <p>
@@ -84,7 +100,7 @@ export default function Post({ post }: { post: IPostWithComment }) {
       <CommentSection>
         <h2>Was it interesting for you?</h2>
         <textarea
-          className="comment-area"
+          className={classes.commentArea}
           name="comment"
           placeholder="Leave a comment"
           value={comment}
@@ -97,13 +113,13 @@ export default function Post({ post }: { post: IPostWithComment }) {
           <p className="error-text">{error}</p>
         </div>
 
-        <div className="comments-list">
+        <div className={classes.commentList}>
           {comments.length
             ? comments.map((comment) => (
                 <Comment key={comment.id}>
-                  <div className="avatar"></div>
-                  <div className="comment-info">
-                    <div className="author">anonymous@gmail.com</div>
+                  <div className={classes.avatar}></div>
+                  <div className={classes.commentInfo}>
+                    <div className={classes.author}>anonymous@gmail.com</div>
                     <div>{comment.body}</div>
                   </div>
                 </Comment>
@@ -112,13 +128,13 @@ export default function Post({ post }: { post: IPostWithComment }) {
         </div>
       </CommentSection>
     </MainLayout>
-  )
+  );
 }
 
 Post.getInitialProps = async ({ query }: NextPageContext) => {
   const response = await axios.get(
     `${API_URL}/posts/${query.postId}?_embed=comments`
-  )
+  );
 
-  return { post: response.data }
-}
+  return { post: response.data };
+};

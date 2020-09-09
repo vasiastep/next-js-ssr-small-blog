@@ -1,17 +1,17 @@
-import { ADD_COMMENT } from '../types'
+import { ADD_COMMENT } from '../types';
 
 const initialState = {
   list: [],
-}
+};
 
-export const commentsReducer = (state = initialState, action) => {
+export const commentsReducer = (state = initialState, action: any): any => {
   switch (action.type) {
     case ADD_COMMENT:
       return {
         ...state,
-        list: [...state.list, action.payload],
-      }
+        list: [...action.payload],
+      };
     default:
-      return { ...state }
+      return { ...state };
   }
-}
+};

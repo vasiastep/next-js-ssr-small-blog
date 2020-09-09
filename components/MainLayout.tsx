@@ -1,6 +1,7 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import styled from 'styled-components'
+import Head from 'next/head';
+import Link from 'next/link';
+import styled from 'styled-components';
+import classes from '../styles/navbar.module.css';
 
 const Container = styled.div`
   padding: 5px 20%;
@@ -11,21 +12,21 @@ const Container = styled.div`
   @media (max-width: 450px) {
     padding: 5px 5%;
   }
-`
+`;
 
 const Navbar = styled.div`
   background-color: #000;
   color: #fff;
   padding: 1rem 0;
-`
+`;
 
 export const MainLayout = ({
   children,
   title = 'Home',
 }: {
-  children: any
-  title: string
-}) => {
+  children: any;
+  title: string;
+}): JSX.Element => {
   return (
     <>
       <Head>
@@ -37,11 +38,11 @@ export const MainLayout = ({
           <header>
             <nav>
               <Link href="/">
-                <a className="nav-link">Home</a>
+                <a className={classes.navLink}>Home</a>
               </Link>
-              <span className="spacing">|</span>
+              <span className={classes.spacing}>|</span>
               <Link href="/posts/new">
-                <a className="nav-link">New post</a>
+                <a className={classes.navLink}>New post</a>
               </Link>
             </nav>
           </header>
@@ -51,5 +52,5 @@ export const MainLayout = ({
         <main>{children}</main>
       </Container>
     </>
-  )
-}
+  );
+};

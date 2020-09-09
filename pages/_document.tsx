@@ -1,10 +1,9 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+  static async getInitialProps(ctx): Promise<any> {
+    const initialProps = await Document.getInitialProps(ctx);
+    return Promise.resolve({ ...initialProps });
   }
 
   render() {
@@ -16,6 +15,6 @@ export default class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
