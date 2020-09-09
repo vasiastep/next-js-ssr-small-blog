@@ -4,32 +4,22 @@ import { MainLayout } from '../../components/MainLayout';
 import { NextPageContext } from 'next';
 import axios from 'axios';
 import { API_URL } from '../../constants';
-import styled from 'styled-components';
 import { addNewComment, setNewComments } from '../../redux/actions';
 import { IPostWithComment, IComment } from '../../interfaces';
 
-import classes from '../../styles/post.module.css';
-
-const CommentSection = styled.div`
-  margin-top: 5rem;
-`;
-
-const Section = styled.section`
-  text-align: justify;
-`;
-const Comment = styled.div`
-  padding: 1rem 2rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  width: 90%;
-  display: flex;
-  align-items: center;
-
-  @media (max-width: 900px) {
-    flex-direction: column;
-  }
-`;
+import {
+  Section,
+  CommentSection,
+  CommentList,
+  CommentTextArea,
+  Button,
+  ErrorText,
+  Comment,
+  Avatar,
+  Author,
+  CommentInfo,
+  PostTitleHeader,
+} from '../../components/styledComponents';
 
 export default function Post({
   post,
@@ -68,7 +58,7 @@ export default function Post({
 
   return (
     <MainLayout title="Post">
-      <h1 className={classes.postTitle}>{post?.title}</h1>
+      <PostTitleHeader>{post?.title}</PostTitleHeader>
       <Section>
         <p>{post?.body}</p>
         <p>
@@ -99,33 +89,30 @@ export default function Post({
       </Section>
       <CommentSection>
         <h2>Was it interesting for you?</h2>
-        <textarea
-          className={classes.commentArea}
+        <CommentTextArea
           name="comment"
           placeholder="Leave a comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-        ></textarea>
+        ></CommentTextArea>
         <div>
-          <button className="btn" onClick={addComment}>
-            Add comment
-          </button>
-          <p className="error-text">{error}</p>
+          <Button onClick={addComment}>Add comment</Button>
+          <ErrorText>{error}</ErrorText>
         </div>
 
-        <div className={classes.commentList}>
+        <CommentList>
           {comments.length
             ? comments.map((comment) => (
                 <Comment key={comment.id}>
-                  <div className={classes.avatar}></div>
-                  <div className={classes.commentInfo}>
-                    <div className={classes.author}>anonymous@gmail.com</div>
+                  <Avatar></Avatar>
+                  <CommentInfo>
+                    <Author>anonymous@gmail.com</Author>
                     <div>{comment.body}</div>
-                  </div>
+                  </CommentInfo>
                 </Comment>
               ))
             : null}
-        </div>
+        </CommentList>
       </CommentSection>
     </MainLayout>
   );

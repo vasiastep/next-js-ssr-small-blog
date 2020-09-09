@@ -1,21 +1,17 @@
 import { useState } from 'react';
 import { MainLayout } from '../../components/MainLayout';
-import styled from 'styled-components';
 import { IPost } from '../../interfaces';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import Router from 'next/router';
-import classes from '../../styles/post.module.css';
-
-const Head = styled.h2`
-  text-align: center;
-`;
-
-const FormContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
+import {
+  Head,
+  FormContainer,
+  PostTitleInput,
+  PostBodyTextarea,
+  ErrorText,
+  Button,
+} from '../../components/styledComponents';
 
 export default function CreatePost(): JSX.Element {
   const [post, setPost] = useState<IPost>({
@@ -53,25 +49,22 @@ export default function CreatePost(): JSX.Element {
     <MainLayout title="Create post">
       <Head>Add new</Head>
       <FormContainer>
-        <input
+        <PostTitleInput
           type="text"
           name="title"
           placeholder="Post title"
-          className={classes.titleInput}
           value={post.title}
           onChange={handleInputChange}
         />
-        <textarea
+        <PostBodyTextarea
           name="body"
           placeholder="Post content"
           className="textarea"
           value={post.body}
           onChange={handleInputChange}
         />
-        <p className="error-text">{error}</p>
-        <button className="btn" onClick={addPost}>
-          Submit
-        </button>
+        <ErrorText>{error}</ErrorText>
+        <Button onClick={addPost}>Submit</Button>
       </FormContainer>
     </MainLayout>
   );

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API_URL } from '../constants';
 import Link from 'next/link';
 import { IPost } from '../interfaces';
-import classes from '../styles/post.module.css';
+import { PostWrap, PostTitle, PostBody } from '../components/styledComponents';
 
 export default function Home({ posts }: { posts: IPost[] }): JSX.Element {
   const [latestPosts, setLatestPosts] = useState<IPost[]>();
@@ -22,10 +22,10 @@ export default function Home({ posts }: { posts: IPost[] }): JSX.Element {
                 as={`/posts/${post.id}`}
                 key={post.id}
               >
-                <div className={classes.post}>
-                  <h1 className={classes.postTitle}>{post.title}</h1>
-                  <div className={classes.postBody}>{post.body}</div>
-                </div>
+                <PostWrap>
+                  <PostTitle>{post.title}</PostTitle>
+                  <PostBody>{post.body}</PostBody>
+                </PostWrap>
               </Link>
             ))
           : null}
@@ -35,7 +35,6 @@ export default function Home({ posts }: { posts: IPost[] }): JSX.Element {
 }
 
 Home.getInitialProps = async () => {
-  // const response = await axios.get(`${API_URL}/posts?_limit=15`)
   const response = await axios.get(`${API_URL}/posts`);
 
   return { posts: response.data };

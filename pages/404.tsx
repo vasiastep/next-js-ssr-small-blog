@@ -1,14 +1,19 @@
 import Link from 'next/link';
+import {
+  ErrorPageWrapper,
+  ErrorPageText,
+  Separator,
+} from '../components/styledComponents';
 
 export default function ErrorPage(): JSX.Element {
   return (
-    <div className="error-page">
-      <h1 className="problem-text">
+    <ErrorPageWrapper>
+      <ErrorPageText>
         <span>Ooops.. </span>
-        <span className="big-line">|</span>
+        <Separator>|</Separator>
         <span> Seems you can not reach this page</span>
-      </h1>
+      </ErrorPageText>
       <Link href="/">Back to home</Link>
-    </div>
+    </ErrorPageWrapper>
   );
 }
