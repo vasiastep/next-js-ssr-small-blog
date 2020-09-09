@@ -1,9 +1,9 @@
-.nav-link {
+.navLink {
   transition: color 0.3s;
   color: #ccc;
 }
 
-.nav-link:hover {
+.navLink:hover {
   color: #fff;
 }
 
