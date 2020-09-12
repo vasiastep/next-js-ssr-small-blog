@@ -1,7 +1,8 @@
-import { ADD_COMMENT } from './types';
 import axios from 'axios';
-import { API_URL } from '../constants';
 import { IPostWithComment, IComment } from '../interfaces';
+
+import { ADD_COMMENT } from './types';
+import { API_URL } from '../constants';
 
 export const addNewComment = (
   commentText: string,

@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { MainLayout } from '../../components/MainLayout';
-import { IPost } from '../../interfaces';
-import axios from 'axios';
-import { API_URL } from '../../constants';
 import Router from 'next/router';
+import axios from 'axios';
+
+import { IPost } from '../../interfaces';
+
+import { MainLayout } from '../../components/MainLayout';
+import { API_URL } from '../../constants';
+
 import {
   Head,
   FormContainer,

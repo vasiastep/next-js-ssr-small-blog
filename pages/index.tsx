@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
-import { MainLayout } from '../components/MainLayout';
-import axios from 'axios';
-import { API_URL } from '../constants';
 import Link from 'next/link';
+import axios from 'axios';
+
 import { IPost } from '../interfaces';
+
+import { MainLayout } from '../components/MainLayout';
+import { API_URL } from '../constants';
+
 import { PostWrap, PostTitle, PostBody } from '../components/styledComponents';
 
 export default function Home({ posts }: { posts: IPost[] }): JSX.Element {

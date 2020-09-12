@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MainLayout } from '../../components/MainLayout';
 import { NextPageContext } from 'next';
 import axios from 'axios';
-import { API_URL } from '../../constants';
-import { addNewComment, setNewComments } from '../../redux/actions';
+
 import { IPostWithComment, IComment } from '../../interfaces';
 
+import { MainLayout } from '../../components/MainLayout';
+import { addNewComment, setNewComments } from '../../redux/actions';
+import { API_URL } from '../../constants';
 import {
   Section,
   CommentSection,
