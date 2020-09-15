@@ -3,7 +3,7 @@
 Firstly, you should clone this repository on Your local machine. Run command in bash:
 
 ```bash
-git clone https://github.com/vasiastep/testing-task-for-develops-today
+git clone https://github.com/vasiastep/next-js-ssr-small-blog.git
 ```
 
 Secondly, You need to install all dependencies. Use command:
