@@ -5,9 +5,9 @@ export interface IPost {
 }
 
 export interface IComment {
-  postId: number | string;
+  postId?: number | string;
   body: string;
-  id: number | string;
+  id?: number | string;
 }
 
 export interface IPostWithComment extends IPost {

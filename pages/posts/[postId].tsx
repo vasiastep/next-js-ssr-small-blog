@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { NextPageContext } from 'next';
 import axios from 'axios';
 
 import { IPostWithComment, IComment } from '../../interfaces';
 
 import { MainLayout } from '../../components/MainLayout';
-import { addNewComment, setNewComments } from '../../redux/actions';
 import { API_URL } from '../../constants';
 import {
   Section,
@@ -29,33 +27,20 @@ export default function Post({
 }): JSX.Element {
   const [comment, setComment] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const dispatch = useDispatch();
   const [comments, setComments] = useState<IComment[]>(post.comments);
-  const { list } = useSelector((state) => state.post);
 
   const addComment = async () => {
     if (comment) {
-      dispatch(addNewComment(comment, post));
+      const newComment = { body: comment, postId: post.id };
 
+      await axios.post(`${API_URL}/comments`, newComment);
+
+      setComments((prev): IComment[] => [newComment, ...prev]);
       setComment('');
     } else {
       return setError('Type something if you want to add comment!');
     }
   };
-
-  useEffect(() => {
-    if (!list.length) {
-      setComments(post.comments);
-    } else {
-      setComments(list);
-    }
-  }, [list]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(setNewComments([]));
-    };
-  }, []);
 
   return (
     <MainLayout title="Post">
